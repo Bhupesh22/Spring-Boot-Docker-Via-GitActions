@@ -19,7 +19,7 @@ public class SpringDockerApplication {
 
     @GetMapping("/health")
     public ResponseEntity<String> health() {
-        String message = "Application is up and running!";
+        String message = "Application is up and running ...!";
         HttpStatus status = HttpStatus.OK;
         return new ResponseEntity<>(message, status);
     }
