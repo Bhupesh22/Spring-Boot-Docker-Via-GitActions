@@ -1,5 +1,4 @@
-bash
-Copy code
+
 # Spring Boot - Docker
 
 Sample spring boot application containing GET endpoints
