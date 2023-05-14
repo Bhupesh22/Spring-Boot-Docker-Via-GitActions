@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SpringDockerApplication {
 
-	@GetMapping("/welcome")
+    @GetMapping("/welcome")
     public ResponseEntity<String> welcome() {
         String message = "This application uses git actions to build docker image";
         return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"" + message + "\"}");
@@ -23,9 +23,9 @@ public class SpringDockerApplication {
         HttpStatus status = HttpStatus.OK;
         return new ResponseEntity<>(message, status);
     }
-	
-	public static void main(String[] args) {
-		SpringApplication.run(SpringDockerApplication.class, args);
-	}
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringDockerApplication.class, args);
+    }
 
 }
