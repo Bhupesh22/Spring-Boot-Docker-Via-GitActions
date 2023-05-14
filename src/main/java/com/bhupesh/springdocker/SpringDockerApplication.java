@@ -16,6 +16,13 @@ public class SpringDockerApplication {
         String message = "This application uses git actions to build docker image";
         return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"" + message + "\"}");
     }
+
+    @GetMapping("/health")
+    public ResponseEntity<String> health() {
+        String message = "Application is up and running!";
+        HttpStatus status = HttpStatus.OK;
+        return new ResponseEntity<>(message, status);
+    }
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringDockerApplication.class, args);
