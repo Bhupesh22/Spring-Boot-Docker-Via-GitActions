@@ -1,5 +1,7 @@
 package com.bhupesh.springdocker;
 
+import java.time.LocalDateTime;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
@@ -12,16 +14,48 @@ import org.springframework.web.bind.annotation.RestController;
 public class SpringDockerApplication {
 
     @GetMapping("/welcome")
-    public ResponseEntity<String> welcome() {
+    public ResponseEntity<welcomeMessage> welcome() {
         String message = "This application uses git actions to build docker image";
-        return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"" + message + "\"}");
+        welcomeMessage responseMessage = new welcomeMessage(message);
+        return ResponseEntity.status(HttpStatus.OK).body(responseMessage);
     }
 
     @GetMapping("/health")
-    public ResponseEntity<String> health() {
+    public ResponseEntity<healthCheckMessage> health() {
         String message = "Application is up and running ...!";
-        HttpStatus status = HttpStatus.OK;
-        return new ResponseEntity<>(message, status);
+        LocalDateTime currentTime = LocalDateTime.now();
+        healthCheckMessage responseMessage = new healthCheckMessage(message, currentTime);
+        return ResponseEntity.status(HttpStatus.OK).body(responseMessage);
+    }
+
+    public static class welcomeMessage {
+        private final String message;
+
+        public welcomeMessage(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+    }
+
+    public static class healthCheckMessage {
+        private final String message;
+        private final LocalDateTime serverTime;
+
+        public healthCheckMessage(String message, LocalDateTime serverTime) {
+            this.message = message;
+            this.serverTime = serverTime;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public LocalDateTime getServerTime() {
+            return serverTime;
+        }
     }
 
     public static void main(String[] args) {
